@@ -63,7 +63,8 @@ int main(int argc, const char * argv[])
 
     if (argc == 2)
     {
-        processVideo(patternImage, calibration, cv::VideoCapture());
+        cv::VideoCapture capture;
+        processVideo(patternImage, calibration, capture);
     }
     else if (argc == 3)
     {
