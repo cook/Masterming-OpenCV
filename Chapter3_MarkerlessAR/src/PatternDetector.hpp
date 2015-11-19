@@ -17,7 +17,11 @@
 #include "Pattern.hpp"
 
 #include <opencv2/opencv.hpp>
-#include <opencv2/nonfree/features2d.hpp>
+#if CV_MAJOR_VERSION < 3
+#  include <opencv2/nonfree/features2d.hpp>
+#else
+#  include <opencv2/xfeatures2d.hpp>
+#endif
 
 class PatternDetector
 {
@@ -27,8 +31,14 @@ public:
      */
     PatternDetector
         (
-        cv::Ptr<cv::FeatureDetector>     detector  = new cv::ORB(1000), 
+#if CV_MAJOR_VERSION < 3
+        cv::Ptr<cv::FeatureDetector>     detector  = new cv::ORB(1000),
         cv::Ptr<cv::DescriptorExtractor> extractor = new cv::FREAK(false, false), 
+#else
+        cv::Ptr<cv::FeatureDetector>     detector  = cv::ORB::create(1000),
+        cv::Ptr<cv::DescriptorExtractor> extractor = cv::xfeatures2d::FREAK::create(false, false), 
+#endif
+
         cv::Ptr<cv::DescriptorMatcher>   matcher   = new cv::BFMatcher(cv::NORM_HAMMING, true),
         bool enableRatioTest                       = false
         );
