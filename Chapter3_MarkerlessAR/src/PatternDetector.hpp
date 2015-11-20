@@ -21,6 +21,7 @@
 #  include <opencv2/nonfree/features2d.hpp>
 #else
 #  include <opencv2/xfeatures2d.hpp>
+#  include <opencv2/xfeatures2d/nonfree.hpp>
 #endif
 
 class PatternDetector
@@ -35,7 +36,9 @@ public:
         cv::Ptr<cv::FeatureDetector>     detector  = new cv::ORB(1000),
         cv::Ptr<cv::DescriptorExtractor> extractor = new cv::FREAK(false, false), 
 #else
-        cv::Ptr<cv::FeatureDetector>     detector  = cv::ORB::create(1000),
+//        cv::Ptr<cv::FeatureDetector>     detector  = cv::ORB::create(1000),
+//        cv::Ptr<cv::DescriptorExtractor> extractor = cv::xfeatures2d::FREAK::create(false, false),
+        cv::Ptr<cv::FeatureDetector>     detector  = cv::xfeatures2d::SURF::create(),
         cv::Ptr<cv::DescriptorExtractor> extractor = cv::xfeatures2d::FREAK::create(false, false), 
 #endif
 

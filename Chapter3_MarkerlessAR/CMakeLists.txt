@@ -10,5 +10,7 @@ include_directories(${OpenGL_INCLUDE_DIR})
 link_directories(${OpenCV_LIBRARY_DIR})
 link_directories(${OpenGL_LIBRARY_DIR})
 
+add_definitions(-D_DEBUG)
+
 include_directories(${EXAMPLE_MARKERLESS_AR_SOURCE_DIR}/src)
 add_subdirectory(src)
