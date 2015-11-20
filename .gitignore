@@ -1,0 +1,6 @@
+build/
+*.jpg
+*.bmp
+*.png
+*~
+cscope.out
